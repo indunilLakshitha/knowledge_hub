@@ -1,0 +1,93 @@
+
+
+
+How to customize Laravel pagination links
+Zubair Idris Aweda
+To customize Laravel pagination links, you will need to take the following steps:
+
+Create a Laravel application.
+Create a database and connect to it.
+Seed database with fake data.
+View all users.
+Add pagination.
+Publish pagination views.
+Edit and use.
+1. Create a Laravel application
+To create a Laravel application, you will need to execute the command shown below.
+
+laravel new pg-link
+2. Create database and connect to it
+Create a database and update your .env file with the connection details, as shown below.
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=pglink
+DB_USERNAME=root
+DB_PASSWORD=
+Remember to add your database password next to the DB_PASSWORD field.
+
+3. Seed database with fake data
+To paginate data, the database has to contain some data. For this purpose, you can paginate the users’ table using the default migration, factory, and seeder.
+
+To do this, uncomment the call to the user factory, and update the count to 30, as shown below.
+
+public function run()
+{
+    Step\App\Models\User::factory(30)->create();
+}
+The code above creates 30 fake users.
+
+Now, run migrations and seed:
+
+php artisan migrate --seed
+4. View all users
+Since there is a database full of users, the next step is to update the web.php routes file to fetch all users, as shown below.
+
+Route::get('/', function () {
+    $users = User::all();
+
+    return view('welcome')->with('users', $users);
+});
+You can then update the welcome Blade file to list all users:
+
+
+
+Users' List
+Users' List
+5. Add pagination
+To make the users’ list easier to navigate, you can only display ten at a time. Laravel lets you use the paginate() method to chunk query results.
+
+To use paginate, instead of get, you need to update the query in the web.php file, as shown below.
+
+$users = User::paginate(10);
+Add the pagination links to the view:
+
+{{ $users->links() }}
+You will notice that the links may not be aesthetically pleasing because Laravel uses Tailwind by default, while this example application uses Bootstrap.
+
+6. Publish pagination views
+To customize the links, you have to be able to access them and edit them. By default, the links are in the vendor folder but may be published for your use.
+
+To see a list of all publishable assets, run the following command.
+
+php artisan vendor:publish
+
+Laravel's publishable assets
+Laravel's publishable assets
+From the list above, you need to find and enter the index of laravel-pagination, which in this case is 16.
+
+Once you enter 16, you will see the following output.
+
+Copied Directory [/vendor/laravel/framework/src/Illuminate/Pagination/resources/views] To [/resources/views/vendor/pagination]
+Publishing complete.
+Now, you should see a vendor/pagination folder with different files.
+
+7. Edit and use
+Now, in your AppServiceProvider boot method, tell Paginator to use Bootstrap, as shown below.
+
+public function boot()
+{
+    Paginator::useBootstrap();
+}
+At this point, the pagination links work fine and can be easily customized by editing the appropriate bootstrap Blade file.
