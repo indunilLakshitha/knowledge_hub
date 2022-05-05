@@ -1,0 +1,60 @@
+
+
+https://techviewleo.com/install-jenkins-server-on-amazon-linux/
+
+<!-- http://18.219.167.226:8080/
+1qaz@WSX3edc -->
+
+<!-- git@bitbucket.org:hinodelabo/costories_api.git -->
+<!-- mysql password ?,NiE(?Pg9q&
+
+bit bucket password 4SM2eKURCRShZYN9PuL9 -->
+
+
+
+###command for link folders in ubuntu
+ln -s /etc/nginx/sites-available/educast /etc/nginx/sites-enabled/educast
+
+
+##01# Install webserver
+sudo yum install nginx -y
+sudo systemctl restart nginx
+sudo systemctl enable nginx
+
+
+vhost-location: /etc/nginx/conf.d
+#######Vhost-File#########
+server {
+        listen 80;
+        ##file location 
+        root /var/www/html/educast-api/public;
+
+        # Add index.php to the list if you are using PHP
+        index index.html index.htm index.php;
+         
+        ##Domian
+        server_name _;
+
+       ##Log file
+       access_log /var/log/nginx/api-access.log combined;
+       error_log /var/log/nginx/api-error_log warn;
+      
+       charset utf-8;
+       gzip on;
+            gzip_types text/css application/javascript text/javascript application/x-javascript  image/svg+xml text/plain text/xsd text/xsl text/xml image/x-icon;
+
+        location / {
+                try_files $uri $uri/ /index.php?$query_string;
+        }
+
+        location ~ \.php {
+                include fastcgi.conf;
+                fastcgi_split_path_info ^(.+\.php)(/.+)$;
+                fastcgi_pass unix:/run/php-fpm/www.sock;
+        }
+
+        location ~ /\.ht {
+                deny all;
+        }
+}
+#########E

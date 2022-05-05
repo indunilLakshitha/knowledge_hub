@@ -1,0 +1,30 @@
+pipeline {
+     agent any
+     stages {
+        stage("Build") {
+            steps {
+                slackSend channel: 'jenkins-alerts', message: 'BUILD START: Job EDUCAST-FE'
+                sh "sudo npm install"
+                sh "sudo mv ${WORKSPACE}/.env.example ${WORKSPACE}/.env"
+                sh "sudo npm run build"
+                sh "sudo chmod -R 777 ${WORKSPACE}"
+            }
+        }
+        stage("Deploy") {
+            steps {
+                sh "sudo rm -rf /var/www/educast/educast-fe"
+                sh "sudo mkdir -p /var/www/educast/educast-fe"
+                sh "sudo cp -r ${WORKSPACE}/build/. /var/www/educast/educast-fe"
+            }
+        }
+    }
+    post {
+        success {
+          slackSend channel: 'jenkins-alerts', color: '#00FF00', message: 'SUCCESSFUL: Job EDUCAST-FE'
+        }
+
+        failure {
+          slackSend channel: 'jenkins-alerts', color: '#FF0000', message: 'FAILED: Job EDUCAST-FE'
+        }
+    }
+}
