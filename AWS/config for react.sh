@@ -1,13 +1,13 @@
 server {
         listen 80;
 
-        root /var/www/educast-live/educast-fe/build/;
+        root /var/www/html/educast-fe/build/;
         index index.html ;
 
-        server_name educast.jp;
+        server_name stg.educast-ceylonsoft.jp;
 
         location / {
-                root /var/www/educast-live/educast-fe/build/;
+                root /var/www/html/educast-fe/build/;
                 index index.html;
                 try_files $uri $uri/ /index.html;
         }
@@ -19,13 +19,13 @@ server {
 server {
         listen 80;
 
-        root /var/www/educast-live/educast-fe/build/;
+        root /var/www/html/educast-fe/build/;
         index index.html ;
 
-        server_name educast.jp;
+        server_name stg-educast-ceylonsoft.jp;
 
         location / {
-                root /var/www/educast-live/educast-fe/build/;
+                root /var/www/html/educast-fe/build/;
                 index index.html;
                 try_files $uri $uri/ /index.html;
         }

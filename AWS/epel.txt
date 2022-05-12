@@ -1,0 +1,5 @@
+sudo amazon-linux-extras install epel -y
+
+sudo amazon-linux-extras enable php8.0 -y
+
+sudo amazon-linux-extras install php8.0 -y
