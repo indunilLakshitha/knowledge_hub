@@ -1,10 +1,10 @@
 server {
         listen 80;
 
-        root /var/www/educast-live/educast-api/public/;
+        root /var/www/j-platform/public/;
         index index.html index.htm index.php;
 
-        server_name api.educast.jp;
+        server_name _;
 
         location / {
                 try_files $uri $uri/ =404;

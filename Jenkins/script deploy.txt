@@ -1,0 +1,4 @@
+#!/bin/bash
+ssh -oStrictHostKeyChecking=no -T -i /home/jenkins/cos-admin-dev.pem www-user@54.92.91.88 << EOF
+bash /home/www-user/scripts/deploy.sh
+EOF
