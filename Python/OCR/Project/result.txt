@@ -1,0 +1,10 @@
+Steps for writing to text files
+To write to a text file in Python, you follow these steps:
+
+© First, open the text file for writing (or appending) using the open() function.
+* Second, write to the text file using the write() or writelines() method.
+
+© Third, close the file using the close() method.
+
+The following shows the basic syntax of the open() function:
+

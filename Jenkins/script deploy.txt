@@ -2,3 +2,12 @@
 ssh -oStrictHostKeyChecking=no -T -i /home/jenkins/cos-admin-dev.pem www-user@54.92.91.88 << EOF
 bash /home/www-user/scripts/deploy.sh
 EOF
+
+#!/bin/bash
+ssh -oStrictHostKeyChecking=no -T -i /home/jenkins/cos-buyer-prod-1.pem www-user@35.73.175.173 << EOF
+bash /home/www-user/scripts/deploy.sh
+EOF
+
+ssh -oStrictHostKeyChecking=no -T -i /home/jenkins/cos-buyer-prod-2.pem www-user@35.77.234.242 << EOF
+bash /home/www-user/scripts/deploy.sh
+EOF

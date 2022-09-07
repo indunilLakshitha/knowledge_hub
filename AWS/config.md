@@ -18,6 +18,8 @@ ln -s /etc/nginx/sites-available/educast /etc/nginx/sites-enabled/educast
 
 ##01# Install webserver
 sudo yum install nginx -y
+
+sudo amazon-linux-extras install nginx1
 sudo systemctl restart nginx
 sudo systemctl enable nginx
 

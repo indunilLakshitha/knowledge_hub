@@ -1,0 +1,12 @@
+### give permission to jenkins user
+
+sudo visudo
+Then edit that file to add to the very end:
+
+username ALL = NOPASSWD: /fullpath/to/command, /fullpath/to/othercommand
+eg
+
+john ALL = NOPASSWD: /sbin/poweroff, /sbin/start, /sbin/stop
+
+
+jenkins ALL=(ALL) NOPASSWD: ALL

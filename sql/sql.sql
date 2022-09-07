@@ -1,0 +1,4 @@
+
+
+export csv
+SELECT * FROM `items` INTO OUTFILE 'C:/SPSS/2022/test.csv' FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\n'

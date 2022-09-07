@@ -1,0 +1,40 @@
+server {
+    server_name  api.share-wellbeing.com ;
+    root         /var/www/app/current/public;
+
+    # Load configuration files for the default server block.
+    include /etc/nginx/default.d/*.conf;
+
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    location ~ \.php$ {
+        include fastcgi_params;
+        fastcgi_pass unix:/run/php-fpm/www.sock;
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+    }
+
+    client_max_body_size 0;
+
+}
+server {
+    if ($host = www.cos-api-dev.costory.jp) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+    if ($host = cos-api-dev.costory.jp) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+    listen 80;
+    server_name  www.cos-api-dev.costory.jp cos-api-dev.costory.jp;
+    return 404; # managed by Certbot
+
+
+
+
+}

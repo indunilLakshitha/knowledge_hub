@@ -1,13 +1,13 @@
 server {
         listen 80;
 
-        root /var/www/educast/educast-admin/build/;
+        root /var/www/educast-fe/build/;
         index index.html ;
 
-        server_name admin.stg.educast.jp www.admin.stg.educast.jp;
+        server_name _;
 
         location / {
-                root /var/www/educast/educast-admin/build/;
+                root /var/www/educast-fe/build/;
                 index index.html;
                 try_files $uri $uri/ /index.html;
         }

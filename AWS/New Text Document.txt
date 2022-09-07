@@ -1,0 +1,44 @@
+server {
+        server_name stg.educast.jp www.stg.educast.jp;
+
+        #listen 443 ssl;
+        #ssl_certificate /etc/letsencrypt/live/share-gift.ceylonsoft-testing.com/fullchain.pem; # managed by Certbot
+        #ssl_certificate_key /etc/letsencrypt/live/share-gift.ceylonsoft-testing.com/privkey.pem; # managed by Certbot
+        #include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+        #ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+        location / {
+                root /var/www/educast/educast-fe;
+                index index.html;
+                try_files $uri $uri/ /index.html;
+        }
+
+        location /api {
+                alias /var/www/educast/educast-api/public;
+                try_files $uri $uri/ @api;
+
+                location ~ \.php$ {
+                        include snippets/fastcgi-php.conf;
+                        fastcgi_param SCRIPT_FILENAME $request_filename;
+                        fastcgi_pass unix:/var/run/php/php7.4-fpm.sock;
+                }
+        }
+
+        location @api {
+                rewrite /api/(.*)$ /api/index.php?/$1 last;
+        }
+
+        # pass PHP scripts to FastCGI server
+        #
+        location ~ \.php$ {
+                include snippets/fastcgi-php.conf;
+                fastcgi_pass unix:/var/run/php/php7.4-fpm.sock;
+        }
+
+        # deny access to .htaccess files, if Apache's document root
+        # concurs with nginx's one
+        #
+        location ~ /\.ht {
+                deny all;
+        }
+}

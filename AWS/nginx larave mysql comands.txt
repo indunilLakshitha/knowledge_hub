@@ -1,0 +1,35 @@
+
+##01## Install webserver
+sudo yum install nginx -y
+
+sudo amazon-linux-extras install nginx1
+sudo systemctl restart nginx
+sudo systemctl enable nginx
+
+##02## Install php
+sudo amazon-linux-extras install epel -y
+sudo amazon-linux-extras enable php8.0 -y
+sudo amazon-linux-extras install php8.0 -y
+sudo yum install php-cli php-xml php-json php-mbstring php-process php-common php-fpm php-zip php-mysqlnd php-sodium git -y
+
+
+##03## Install composer
+curl -sS https://getcomposer.org/installer | php
+sudo mv composer.phar /usr/bin/composer
+sudo chmod +x /usr/bin/composer
+
+##04## start fpm
+sudo systemctl start httpd
+sudo systemctl start php-fpm
+sudo systemctl enable php-fpm
+
+##05## start mysql
+sudo yum install https://dev.mysql.com/get/mysql80-community-release-el7-5.noarch.rpm
+sudo amazon-linux-extras install epel -y
+sudo yum -y install mysql-community-server
+sudo systemctl enable --now mysqld
+sudo grep 'temporary password' /var/log/mysqld.log
+sudo mysql_secure_installation -p
+
+
+mysql -uroot -p and mysql commands run

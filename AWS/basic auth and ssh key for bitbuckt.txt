@@ -1,0 +1,22 @@
+
+
+
+### BASIC AUTH###
+
+rpm -qa | grep httpd-tools
+
+
+
+sudo htpasswd -c /etc/nginx/conf.d/.htpasswd admin
+
+
+   auth_basic "Restricted Content";
+    auth_basic_user_file  /etc/nginx/conf.d/.htpasswd;
+
+
+
+###bit sssh key
+
+
+root@ip-172-31-23-74:/home/ubuntu/.ssh# ssh-keygen -f bitbucket-key
+root@ip-172-31-23-74:/home/ubuntu/.ssh#     ssh -v git@bitbucket.org
