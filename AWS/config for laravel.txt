@@ -1,10 +1,10 @@
 server {
         listen 80;
 
-        root /var/www/j-platform/public/;
+        root /var/www/html/bizeyes/public;
         index index.html index.htm index.php;
 
-        server_name _;
+        server_name service-monitor.bizeyes.jp www.service-monitor.bizeyes.jp;
 
         location / {
                 try_files $uri $uri/ =404;
@@ -12,7 +12,7 @@ server {
 
         location ~ \.php$ {
                 include snippets/fastcgi-php.conf;
-                fastcgi_pass unix:/var/run/php/php8-fpm.sock;
+                fastcgi_pass 127.0.0.1:9000;
         }
 
 }

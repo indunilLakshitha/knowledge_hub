@@ -1,0 +1,1 @@
+aws s3 sync s3://viewtiful-eyeland-test D:\backup\moland\s3\050923\test

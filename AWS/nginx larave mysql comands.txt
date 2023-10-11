@@ -8,9 +8,9 @@ sudo systemctl enable nginx
 
 ##02## Install php
 sudo amazon-linux-extras install epel -y
-sudo amazon-linux-extras enable php8.0 -y
-sudo amazon-linux-extras install php8.0 -y
-sudo yum install php-cli php-xml php-json php-mbstring php-process php-common php-fpm php-zip php-mysqlnd php-sodium git -y
+sudo amazon-linux-extras enable php8.1 -y
+sudo amazon-linux-extras install php8.1 -y
+sudo yum install php-cli php-xml php-json php-mbstring php-process php-common php-fpm php-zip php-mysqlnd php-sodium git php-gd -y
 
 
 ##03## Install composer

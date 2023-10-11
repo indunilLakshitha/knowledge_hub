@@ -1,0 +1,2 @@
+For Bash  (gitbash)  in windows   go to: "C:\Program Files\Git\etc" and open bash.bashrc .  add this line     alias pa="php artisan"   ... thats all
+

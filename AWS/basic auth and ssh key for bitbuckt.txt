@@ -5,13 +5,11 @@
 
 rpm -qa | grep httpd-tools
 
-
-
 sudo htpasswd -c /etc/nginx/conf.d/.htpasswd admin
 
 
-   auth_basic "Restricted Content";
-    auth_basic_user_file  /etc/nginx/conf.d/.htpasswd;
+auth_basic "Restricted Content";
+auth_basic_user_file  /etc/nginx/conf.d/.htpasswd;
 
 
 

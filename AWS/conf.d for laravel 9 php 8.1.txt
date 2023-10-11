@@ -1,13 +1,18 @@
 server {
         listen 80;
 
-        root /var/www/bizeyes/public;
+        root /var/www/dev/educast-api/public;
 
         # Add index.php to the list if you are using PHP
         index index.html index.htm index.php;
 
-        server_name service.bizeyes.jp www.service.bizeyes.jp;
+        server_name _ ;
 
+        location / {
+                root /var/www/dev/educast-api/public;
+                #try_files $uri $uri/ =404;
+                try_files $uri $uri/ /index.php?$query_string;
+        }
 
         access_log /var/log/nginx/api-access.log combined;
         error_log /var/log/nginx/api-error_log warn;
@@ -15,9 +20,7 @@ server {
         gzip on;
             gzip_types text/css application/javascript text/javascript application/x-javascript  image/svg+xml text/plain text/xsd text/xsl text/xml image/x-icon;
 
-        location / {
-                try_files $uri $uri/ /index.php?$query_string;
-        }
+
 
         location ~ \.php {
                 include fastcgi.conf;
@@ -29,5 +32,4 @@ server {
                 deny all;
         }
 }
-	access_log /var/logs/example.com/example-com-nginx-access.log;
-	error_log /var/logs/example.com/example-com-nginx-error.log;
+
